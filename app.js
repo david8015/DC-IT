@@ -1,19 +1,24 @@
 console.log('connect to app.js');
 
-function signUpUser(email,password,username){
-    opts = { email: email, password: password, username: username}
-    fetch(`http://thesi.generalassemb.ly:8080/signup`, {
-        method: 'post',
-        body: JSON.stringify(opts)
-      }).then(function(response) {
-        return response.json();
-      }).then(function(data) {
-        console.log(response);
-      })
-      ;   
-}
+  function signUpUser(mail,pwd,uname){
 
-// signUpUser("carlos@Ga.com", "carlos", "carlos")
+    (async () => {
+      const rawResponse = await fetch('http://thesi.generalassemb.ly:8080/signup', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({email: mail, password: pwd, username: uname})
+      });
+      const content = await rawResponse.json();
+    
+      console.log(content);
+    })()
+    
+    
+   
+  };
 
 (function listAllPosts(){
   let postsBoard = document.getElementById("all-post")
@@ -27,9 +32,12 @@ function signUpUser(email,password,username){
         theTitle.innerText = response[i].title;
 
         let theParagraph = document.createElement('p');
+        let theCreator = document.createElement('p');
         theParagraph.innerText = response[i].description;
+        theCreator.innerText = `created by: ${response[i].user.username}`;
         postsBoard.appendChild(theTitle);
         postsBoard.appendChild(theParagraph);
+        postsBoard.appendChild(theCreator);
           }
         console.log(response); 
       })
@@ -41,9 +49,9 @@ function signUpUser(email,password,username){
       })
 })();
 
-// window.addEventListener("DOMLoadContent", )
 
-(function login(){
+
+function login(mail, pwd){
   fetch("http://thesi.generalassemb.ly:8080/login", {
     method: 'POST',
 
@@ -53,8 +61,8 @@ function signUpUser(email,password,username){
   },
 
     body: JSON.stringify({
-        email: "superman@superhero.com",
-        password: "super",
+        email: mail,
+        password: pwd,
            })
     })
     .then((response )=> {
@@ -66,4 +74,4 @@ function signUpUser(email,password,username){
     .catch(function(error){
         alert("Wrong Username or password")
     })
-})();
+}
