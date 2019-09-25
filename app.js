@@ -20,6 +20,8 @@ console.log('connect to app.js');
    
   };
 
+  
+
 (function listAllPosts(){
   let postsBoard = document.getElementById("all-post")
     fetch(`http://thesi.generalassemb.ly:8080/post/list`)
@@ -49,7 +51,21 @@ console.log('connect to app.js');
       })
 })();
 
+// LOGIN
 
+const loginButton = document.getElementById('login');
+
+loginButton.addEventListener('click', function (event) {
+ // alert('Element clicked through function!');
+ let mail = document.getElementById("email-login").value;
+ let pwd = document.getElementById("password-login").value;
+ //console.log("mail", mail)
+ //console.log("password",pwd)
+ login(mail, pwd)
+
+ mail.innerText = ""
+ pwd.innerText = ""
+});
 
 function login(mail, pwd){
   fetch("http://thesi.generalassemb.ly:8080/login", {
@@ -68,10 +84,15 @@ function login(mail, pwd){
     .then((response )=> {
         return response.json();
     })
-    .then((json) =>{
-        console.log(json)
+    .then((response) =>{
+  //    console.log("token: ",response.token)
+        sessionStorage("token", response.token)
+   //     console.log("token was saved!!->", sessionStorage.getItem("token"))
     })
     .catch(function(error){
         alert("Wrong Username or password")
     })
+
+    
+
 }
