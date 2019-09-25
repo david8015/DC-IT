@@ -29,7 +29,7 @@ console.log('connect to app.js');
         return response.json();
       })
       .then ((response) => {
-          for (let i = 0; i < 30; i++){
+          for (let i = response.length - 1; i > response.length - 30; i--){
         let theTitle = document.createElement('h2');
         theTitle.innerText = response[i].title;
 
