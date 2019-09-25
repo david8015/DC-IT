@@ -1,4 +1,4 @@
-console.log('connect to app.js')
+console.log('connect to app.js');
 
 function signUpUser(email,password,username){
     opts = { email: email, password: password, username: username}
@@ -8,14 +8,14 @@ function signUpUser(email,password,username){
       }).then(function(response) {
         return response.json();
       }).then(function(data) {
-        console.log(response)
+        console.log(response);
       })
       ;   
 }
 
 // signUpUser("carlos@Ga.com", "carlos", "carlos")
 
-function listAllPosts(){
+(function listAllPosts(){
   let postsBoard = document.getElementById("all-post")
     fetch(`http://thesi.generalassemb.ly:8080/post/list`)
     .then((response) => {
@@ -23,12 +23,13 @@ function listAllPosts(){
       })
       .then ((response) => {
           for (let i = 0; i < 30; i++){
-        let theTitle = document.createElement('h2')
-        theTitle.innerText = response[i].title
-        let theParagraph = document.createElement('p')
-        theParagraph.innerText = response[i].description
-        postsBoard.appendChild(theTitle)
-        postsBoard.appendChild(theParagraph)
+        let theTitle = document.createElement('h2');
+        theTitle.innerText = response[i].title;
+
+        let theParagraph = document.createElement('p');
+        theParagraph.innerText = response[i].description;
+        postsBoard.appendChild(theTitle);
+        postsBoard.appendChild(theParagraph);
           }
         console.log(response); 
       })
@@ -38,6 +39,31 @@ function listAllPosts(){
       .finally (() => {
         console.log('done');
       })
-}
+})();
 
-listAllPosts()
+// window.addEventListener("DOMLoadContent", )
+
+(function login(){
+  fetch("http://thesi.generalassemb.ly:8080/login", {
+    method: 'POST',
+
+    headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+  },
+
+    body: JSON.stringify({
+        email: "superman@superhero.com",
+        password: "super",
+           })
+    })
+    .then((response )=> {
+        return response.json();
+    })
+    .then((json) =>{
+        console.log(json)
+    })
+    .catch(function(error){
+        alert("Wrong Username or password")
+    })
+})();
