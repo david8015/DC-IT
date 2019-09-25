@@ -16,9 +16,18 @@
         </div>
         <nav id="nav-bar">
           <ul id="nav-list">
-            <!-- <li><a class = "nav-link" href="#advantage">DC-IT</a></li> -->
             <li id="register"><a class = "nav-link" href="#">REGISTER</a></li>
-            <li id="login"><a class = "nav-link" href="#">LOGIN</a></li>
+
+            <div class="dropdown">
+              <button class="dropbtn">LOGIN 
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-content">
+                <input id="email-login" class="login-info" type="text" placeholder="enter your email">
+               <input id="password-login" class="login-info" type="text" placeholder="enter your password">
+                <button id="login">LOGIN</button>
+              </div>
+            
           </ul>
         </nav>
         
