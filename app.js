@@ -14,32 +14,63 @@ console.log('connect to app.js');
       const content = await rawResponse.json();
     
       console.log(content);
-    })()
-    
-    
-   
+    })()  
   };
 
-  
-
-(function listAllPosts(){
-  let postsBoard = document.getElementById("all-post")
+  (function listAllPosts(){
     fetch(`http://thesi.generalassemb.ly:8080/post/list`)
     .then((response) => {
         return response.json();
       })
       .then ((response) => {
           for (let i = response.length - 1; i > response.length - 30; i--){
-        let theTitle = document.createElement('h2');
-        theTitle.innerText = response[i].title;
 
-        let theParagraph = document.createElement('p');
-        let theCreator = document.createElement('p');
-        theParagraph.innerText = response[i].description;
-        theCreator.innerText = `created by: ${response[i].user.username}`;
-        postsBoard.appendChild(theTitle);
-        postsBoard.appendChild(theParagraph);
-        postsBoard.appendChild(theCreator);
+            //  Blog Post
+         let postsBoard = document.createElement("div");
+         postsBoard.id="post";
+         postsBoard.className = "card mb-4";
+
+         document.querySelector("#main-content").appendChild(postsBoard);
+
+         let postMain = document.createElement("div");
+         postMain.id = "post-main";
+         postMain.className = "card-body text-truncate";
+         
+         let cardTitle = document.createElement("h2");
+         cardTitle.className = "card-title";
+         cardTitle.innerHTML = response[i].title;
+      
+          let cardText = document.createElement("p");
+          cardText.className = "card-text";
+          cardText.innerHTML = response[i].description;
+      
+          let cardBtn = document.createElement("a");
+          cardBtn.id = "read-more";
+          cardBtn.setAttribute("href", "#");
+          cardBtn.className = "btn btn-primary";
+          cardBtn.innerHTML = "Read More →"
+
+          postsBoard.appendChild(postMain);
+           postMain.appendChild(cardTitle);
+           postMain.appendChild(cardText);
+           postMain.appendChild(cardBtn);
+
+
+           let postFooter = document.createElement("div");
+           postFooter.id = "post-footer";
+           postFooter.className = "card-footer text-muted";
+           postFooter.innerHTML = `created by: ${response[i].user.username}`;
+          
+          postsBoard.appendChild(postFooter);
+
+         let commentBtn = document.createElement("a");
+         commentBtn.id ="comment-btn";
+        //  commentBtn.className = "d-none"
+         commentBtn.setAttribute("href", "#");
+         commentBtn.innerHTML = "DELETE";
+
+         postFooter.appendChild(commentBtn);
+        
           }
         console.log(response); 
       })
