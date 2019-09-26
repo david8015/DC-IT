@@ -1,5 +1,25 @@
 console.log('connect to app.js');
 
+const signUpButton = document.getElementById('register-btn');
+
+signUpButton.addEventListener('click', function (event) {
+ // alert('Element clicked through function!');
+ event.preventDefault()
+
+ let mail = document.getElementById("register-email").value;
+ let pwd = document.getElementById("register-password").value;
+ let uname = document.getElementById("register-username").value;
+ console.log("mail", mail)
+ console.log("password",pwd)
+  console.log("username",uname)
+ signUpUser(mail, pwd,uname)
+
+ mail.value = ""
+ pwd.value = ""
+ uname.value = ""
+});
+
+
   function signUpUser(mail,pwd,uname){
 
     (async () => {
@@ -84,18 +104,19 @@ console.log('connect to app.js');
 
 // LOGIN
 
-const loginButton = document.getElementById('login');
+const loginButton = document.getElementById('login-btn');
 
 loginButton.addEventListener('click', function (event) {
- // alert('Element clicked through function!');
- let mail = document.getElementById("email-login").value;
- let pwd = document.getElementById("password-login").value;
- //console.log("mail", mail)
- //console.log("password",pwd)
- login(mail, pwd)
+  event.preventDefault()
 
- mail.innerText = ""
- pwd.innerText = ""
+ let mail = document.getElementById("login-email").value;
+ let pwd = document.getElementById("login-password").value;
+  console.log(mail)
+  console.log(pwd)
+  login(mail, pwd)
+
+  mail.value = ""
+  pwd.value = ""
 });
 
 function login(mail, pwd){
@@ -116,8 +137,8 @@ function login(mail, pwd){
         return response.json();
     })
     .then((response) =>{
-  //    console.log("token: ",response.token)
-        sessionStorage("token", response.token)
+      console.log("token: ",response.token)
+     //   sessionStorage("token", response.token)
    //     console.log("token was saved!!->", sessionStorage.getItem("token"))
     })
     .catch(function(error){
