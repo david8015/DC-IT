@@ -1,4 +1,4 @@
-console.log('connect to app.js');
+// console.log('connect to app.js');
 
 const signUpButton = document.getElementById('register-btn');
 
@@ -33,7 +33,7 @@ signUpButton.addEventListener('click', function (event) {
       });
       const content = await rawResponse.json();
     
-      console.log(content);
+      // console.log(content);
     })()  
   };
 
@@ -111,23 +111,20 @@ loginButton.addEventListener('click', function (event) {
 
  let mail = document.getElementById("login-email").value;
  let pwd = document.getElementById("login-password").value;
-  console.log(mail)
-  console.log(pwd)
   login(mail, pwd)
 
   mail.value = ""
   pwd.value = ""
 });
 
+
 function login(mail, pwd){
   fetch("http://thesi.generalassemb.ly:8080/login", {
     method: 'POST',
-
     headers:{
       'Accept': 'application/json',
       'Content-Type': 'application/json'
   },
-
     body: JSON.stringify({
         email: mail,
         password: pwd,
@@ -137,14 +134,35 @@ function login(mail, pwd){
         return response.json();
     })
     .then((response) =>{
-      console.log("token: ",response.token)
-     //   sessionStorage("token", response.token)
-   //     console.log("token was saved!!->", sessionStorage.getItem("token"))
+      sessionStorage.setItem('token', response.token);
+      sessionStorage.setItem("userName", response.username);
+      displayUser();
+
     })
     .catch(function(error){
         alert("Wrong Username or password")
+        console.log(error);
     })
+  }
 
-    
+  function displayUser(){
+    let elem = document.querySelector("#displayUser");
+    let userName = sessionStorage.getItem("userName");
 
-}
+    if (userName !== "undefined"){
+      elem.innerHTML = `Welcome, ${userName}`;
+
+    let createPost = document.querySelector("#create-post");
+    let logout = document.querySelector("#logout");
+
+    createPost.className ="btn btn-primary";
+    logout.className = "btn btn-primary";
+
+    let registerDrop = document.querySelector("#register-dropdown");
+    let loginDrop = document.querySelector("#login-dropdown");
+
+    registerDrop.className = "d-none";
+    loginDrop.className = "d-none";
+
+    }
+  }

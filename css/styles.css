@@ -16,12 +16,19 @@
   margin: 0 100px;
 }
 
-.navbar-nav a, #register-dropdown button, #login-dropdown button{
+.navbar-nav a, #register-dropdown button, #login-dropdown button, #create-post, #logout{
   color: #8f36f5;
   background-color: #bfcce0;
+  margin: 10px;
 }
 
 .form-group input{
  width: 300px !important;
  height: 40px !important;
+}
+
+#displayUser{
+  font-size: 30px;
+  color: #8f36f5;
+  margin-right: 80px;
 }
