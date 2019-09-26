@@ -65,7 +65,7 @@ console.log('connect to app.js');
 
          let commentBtn = document.createElement("a");
          commentBtn.id ="comment-btn";
-        //  commentBtn.className = "d-none"
+         commentBtn.className = "float-right d-none";
          commentBtn.setAttribute("href", "#");
          commentBtn.innerHTML = "DELETE";
 
