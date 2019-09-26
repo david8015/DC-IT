@@ -1,43 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/styles.css">
-    <title>DC-IT</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
-    
-    <header id="header">
-        <div id="logo">
-          <img id="header-img" src="https://res.cloudinary.com/david8015/image/upload/v1569361444/pencil-alt-solid_a27fcm.svg" alt="pencil">
-          <h2 id="company-name"><a href="#">DC-IT</a></h2>
+    <nav class="navbar navbar-expand-lg fixed-top">  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <a class="navbar-brand" href="#">
+                    <img src="https://res.cloudinary.com/david8015/image/upload/v1569361444/pencil-alt-solid_a27fcm.svg" class="d-inline-block align-top" alt="">
+                        DC-IT
+                </a>
+            </ul>
+
+                  <!-- REGISTER DROPDOWN -->
+        <div id="register-dropdown" class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                REGISTER
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <form id="register-form" class="px-4 py-3">
+                    <div class="form-group">
+                        <label for="exampleDropdownFormEmail1">Email address:   </label>
+                        <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleDropdownFormPassword1">Username:</label>
+                        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleDropdownFormPassword1">Password:</label>
+                        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                    </div>
+                    <div class="dropdown-divider"></div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
         </div>
-        <nav id="nav-bar">
-          <ul id="nav-list">
-            <li id="register"><a class = "nav-link" href="#">REGISTER</a></li>
 
-            <div class="dropdown">
-              <button class="dropbtn">LOGIN 
-                <i class="fa fa-caret-down"></i>
-              </button>
-              <div class="dropdown-content">
-                <input id="email-login" class="login-info" type="email" placeholder="enter your email">
-               <input id="password-login" class="login-info" type="password" placeholder="enter your password">
-                <button id="login">LOGIN</button>
-              </div>  
-          </ul>
+                 <!-- LOGIN DROPDOWN -->
+                 <div id="login-dropdown" class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          LOGIN
+                        </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+    
+                        <form id="login-form" class="px-4 py-3">
+                          <div class="form-group">
+                            <label for="exampleDropdownFormEmail1">Email address:</label>
+                            <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleDropdownFormPassword1">Password:</label>
+                            <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                          </div>
+                          <div class="dropdown-divider"></div>
+                          <button type="submit" class="btn btn-primary">LOGIN</button>
+                        </form>
 
-          
-        </nav>
-        
-        
-      </header>
-      <h1> List of Recent Posts</h1>
-<main id="all-post"></main>
+                      </div>
+                    </div>
+                </div>
+    </nav>  
+            
+    <main id="main">
+        <div class="col-md-7 mx-auto">
+                <h1 class="my-4 text-center">Recent Posts</h1>
 
-<script src="../app.js"></script>
+                <!-- Blog Post -->
+                <div class="card mb-4">
+                  <div class="card-body text-truncate">
+                    <h2 class="card-title">Post Title</h2>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
+                    <a href="#" class="btn btn-primary">Read More →</a>
+                  </div>
+                  <div class="card-footer text-muted">
+                    Posted by <p></p>
+                    <a href="#">comment</a>
+                  </div>
+                </div>
+
+                <!-- Pagination -->
+                <div aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                          <li class="page-item"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </div>
+        </div>
+
+</main>
+<script src="/app.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
