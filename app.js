@@ -166,3 +166,49 @@ function login(mail, pwd){
 
     }
   }
+
+
+// POSTS
+
+// here we need an event listener that will get the title and description from a form
+// in the html and that will also call createPost
+
+
+
+const postButton = document.getElementById('create-post');
+
+postButton.addEventListener('click', function (event) {
+  event.preventDefault()
+
+let token = sessionStorage.getItem("token") 
+ let title = document.getElementById("post-title").value;
+ let description = document.getElementById("post-description").value;
+  createPost(token, title, description)
+
+  title.value = ""
+  description.value = ""
+
+});
+
+
+function createPost(bearer_token, title, description){
+  let bearer = 'Bearer ' + bearer_token;
+  fetch("http://thesi.generalassemb.ly:8080/post", {
+    method: 'POST',
+
+    headers:{
+      'Authorization': bearer,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'          
+  },
+
+    body: JSON.stringify({
+        title: title,
+        description: description,
+           })
+    }) 
+
+    window.location.reload();
+    
+}
+

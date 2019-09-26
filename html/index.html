@@ -19,6 +19,29 @@
             </ul>
             <span id="displayUser" class="navbar-text"></span>
 
+                      <!-- POST DROPDOWN -->
+                      <div id="post-dropdown" class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            POST
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <form id="post-form" class="px-4 py-3">
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormEmail1">Title: </label>
+                                    <input type="text" class="form-control" id="post-title" placeholder="Title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormPassword1">Description:</label>
+                                    <input type="textarea" class="form-control" id="post-description" placeholder="Description">
+                                </div>
+            
+                                <div class="dropdown-divider"></div>
+                                <button type="submit" class="btn btn-primary" id="create-post">Create Post</button>
+                            </form>
+                            </div>
+                    </div>
+            
+        
                   <!-- REGISTER DROPDOWN -->
         <div id="register-dropdown" class="btn-group">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,6 +67,8 @@
             </div>
         </div>
 
+
+        
         <button type="submit" class="btn btn-primary d-none" id="create-post">Create Post</button>
         <button type="submit" class="btn btn-primary d-none" id="logout">LOGOUT</button>
 
