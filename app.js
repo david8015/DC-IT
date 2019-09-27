@@ -147,6 +147,27 @@ function login(mail, pwd){
     })
   }
 
+  function getCommentsByPostId(postId){
+
+    fetch(`http://thesi.generalassemb.ly:8080/post/${postId}/comment`)
+    .then((response) => {
+        return response.json();
+      })
+      .then ((response) => {
+      console.log(response)
+       
+      })
+      .catch ((err) => {
+        console.log(err);
+      })
+      .finally (() => {
+         console.log('done');
+      
+      })
+}
+
+  
+
   // on login 
 
   window.onload = function(){
@@ -220,6 +241,7 @@ function postEventListener(){
    postList[i].addEventListener("click", function(){
      console.log("event listener");
      console.log(event.target.id);
+     getCommentsByPostId(event.target.id)
      return event.target.id;
    });
  }
