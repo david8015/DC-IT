@@ -58,17 +58,18 @@ signUpButton.addEventListener('click', function (event) {
          
          let cardTitle = document.createElement("h2");
          cardTitle.className = "card-title";
-         cardTitle.innerHTML = response[i].title;
-         cardTitle.setAttribute("data-post-id", response[i].id);
+         cardTitle.innerHTML = response[i].title + " " + response[i].id;
       
           let cardText = document.createElement("p");
           cardText.className = "card-text";
           cardText.innerHTML = response[i].description;
       
           let cardBtn = document.createElement("a");
-          cardBtn.id = "read-more";
+          cardBtn.id= response[i].id;
+          // cardBtn.id = "read-more";
+          cardBtn.setAttribute("data-postid", response[i].id);
           cardBtn.setAttribute("href", "#");
-          cardBtn.className = "btn btn-primary";
+          cardBtn.className = "btn btn-primary listener";
           cardBtn.innerHTML = "Read More →"
 
           postsBoard.appendChild(postMain);
@@ -99,7 +100,8 @@ signUpButton.addEventListener('click', function (event) {
         console.log(err);
       })
       .finally (() => {
-        console.log('done');
+        // console.log('done');
+        postEventListener();
       })
 })();
 
@@ -209,8 +211,16 @@ function createPost(bearer_token, title, description){
         description: description,
            })
     }) 
-
-    // window.location.reload();
-    
 }
 
+// create event listener on each button and return the post ID
+function postEventListener(){
+ let postList = document.querySelectorAll(".listener");
+ for(let i=0; i< postList.length; i++){
+   postList[i].addEventListener("click", function(){
+     console.log("event listener");
+     console.log(event.target.id);
+     return event.target.id;
+   });
+ }
+};
