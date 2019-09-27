@@ -204,7 +204,7 @@ function login(mail, pwd){
 
           {/* <!-- Comments Form --> */}
 
-          for(let i=0; i<response.length; i++){}
+         
 
           //  <div class="card my-4">
              let d1 = document.createElement("div");
@@ -253,6 +253,8 @@ function login(mail, pwd){
 
           //  <!-- Single Comment --> 
           //  <div class="media mb-4">
+          for(let i=0; i<response.length; i++){
+
           let d4 = document.createElement("div");
           d4.className = "media mb-4"
           
@@ -266,7 +268,7 @@ function login(mail, pwd){
           //     <h5 class="mt-0">Commenter Name</h5>
           let commenterName = document.createElement("h5");
           commenterName.className = "mt-0"
-          commenterName.innerHTML = response[0].user.username;
+          commenterName.innerHTML = response[i].user.username;
 
           // console.log(response[0]);
           // console.log(response[0].user);
@@ -274,8 +276,10 @@ function login(mail, pwd){
           d5.appendChild(commenterName);
 
           let p2 = document.createElement("p");
-          p2.innerHTML = response[0].text;
+          p2.innerHTML = response[i].text;
           d5.appendChild(p2);
+          // loop finishes here
+          }
           console.log(document.getElementById("create-comment"), 'create comment node');
          document.getElementById("create-comment").addEventListener('click', function(e){
         e.preventDefault();
