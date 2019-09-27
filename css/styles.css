@@ -16,7 +16,7 @@
   margin: 0 100px;
 }
 
-.navbar-nav a, #register-dropdown button, #login-dropdown button, #create-post, #logout{
+.navbar-nav a, #register-dropdown button, #login-dropdown button, #create-post, #logout, #post-btn{
   color: #8f36f5;
   background-color: #bfcce0;
   margin: 10px;
@@ -34,12 +34,10 @@
 }
 
 #post-description{
- width: 300px;
- height: 400px;
+ width: 400px !important;
+ height: 400px !important;
 }
-
+ 
 #post-title{
-  width: 300px;
-  
-
-}
+  width: 400px !important;
+} 

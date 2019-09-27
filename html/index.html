@@ -20,19 +20,20 @@
             <span id="displayUser" class="navbar-text"></span>
 
                       <!-- POST DROPDOWN -->
-                      <div id="post-dropdown" class="btn-group">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div id="post-dropdown" class="btn-group d-none">
+                        <button type="button" id="post-btn" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             POST
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
                             <form id="post-form" class="px-4 py-3">
                                 <div class="form-group">
-                                    <label for="exampleDropdownFormEmail1">Title: </label>
+                                    <label for="post-title">Title: </label>
                                     <input type="text" class="form-control" id="post-title" placeholder="Title">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleDropdownFormPassword1">Description:</label>
-                                    <input type="textarea" class="form-control" id="post-description" placeholder="Description">
+                                    <label for="post-description">Description:</label>
+                                    <!-- <input type="text" class="form-control" id="post-description" placeholder="Description"> -->
+                                    <textarea class="form-control" id="post-description" aria-label="With textarea"></textarea>
                                 </div>
             
                                 <div class="dropdown-divider"></div>
@@ -50,15 +51,15 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <form id="register-form" class="px-4 py-3">
                     <div class="form-group">
-                        <label for="exampleDropdownFormEmail1">Email address:   </label>
+                        <label for="register-email">Email address:   </label>
                         <input type="email" class="form-control" id="register-email" placeholder="email@example.com">
                     </div>
                     <div class="form-group">
-                        <label for="exampleDropdownFormPassword1">Username:</label>
+                        <label for="register-username">Username:</label>
                         <input type="password" class="form-control" id="register-username" placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <label for="exampleDropdownFormPassword1">Password:</label>
+                        <label for="register-password">Password:</label>
                         <input type="password" class="form-control" id="register-password" placeholder="Password">
                     </div>
                     <div class="dropdown-divider"></div>
@@ -81,11 +82,11 @@
     
                         <form id="login-form" class="px-4 py-3">
                           <div class="form-group">
-                            <label for="exampleDropdownFormEmail1">Email address:</label>
+                            <label for="login-email">Email address:</label>
                             <input type="email" class="form-control" id="login-email" placeholder="email@example.com">
                           </div>
                           <div class="form-group">
-                            <label for="exampleDropdownFormPassword1">Password:</label>
+                            <label for="login-password">Password:</label>
                             <input type="password" class="form-control" id="login-password" placeholder="Password">
                           </div>
                           <div class="dropdown-divider"></div>

@@ -45,7 +45,7 @@ signUpButton.addEventListener('click', function (event) {
       .then ((response) => {
           for (let i = response.length - 1; i > response.length - 30; i--){
 
-            //  Blog Post
+            //  generate Recent Posts dynamically
          let postsBoard = document.createElement("div");
          postsBoard.id="post";
          postsBoard.className = "card mb-4";
@@ -59,6 +59,7 @@ signUpButton.addEventListener('click', function (event) {
          let cardTitle = document.createElement("h2");
          cardTitle.className = "card-title";
          cardTitle.innerHTML = response[i].title;
+         cardTitle.setAttribute("data-post-id", response[i].id);
       
           let cardText = document.createElement("p");
           cardText.className = "card-text";
@@ -145,24 +146,33 @@ function login(mail, pwd){
     })
   }
 
+  // on login 
   function displayUser(){
     let elem = document.querySelector("#displayUser");
     let userName = sessionStorage.getItem("userName");
 
+    // on login display welcome message
     if (userName !== "undefined"){
       elem.innerHTML = `Welcome, ${userName}`;
 
-    let createPost = document.querySelector("#create-post");
+    // and display the logout and create post options
+    let createPost = document.querySelector("#post-dropdown");
     let logout = document.querySelector("#logout");
 
-    createPost.className ="btn btn-primary";
+    createPost.className ="btn-group";
     logout.className = "btn btn-primary";
 
+    // target register and login dropdowns
     let registerDrop = document.querySelector("#register-dropdown");
     let loginDrop = document.querySelector("#login-dropdown");
 
+    // remove display of register and login dropdowns
     registerDrop.className = "d-none";
     loginDrop.className = "d-none";
+
+    // // give user the option to create a post
+    // let postDrop = document.querySelector("#post-dropdown");
+    // postDrop.className = "btn-group";
 
     }
   }
