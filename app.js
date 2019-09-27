@@ -118,7 +118,6 @@ loginButton.addEventListener('click', function (event) {
   pwd.value = ""
 });
 
-
 function login(mail, pwd){
   fetch("http://thesi.generalassemb.ly:8080/login", {
     method: 'POST',
@@ -137,7 +136,7 @@ function login(mail, pwd){
     .then((response) =>{
       sessionStorage.setItem('token', response.token);
       sessionStorage.setItem("userName", response.username);
-      displayUser();
+      window.location.reload();
 
     })
     .catch(function(error){
@@ -147,12 +146,16 @@ function login(mail, pwd){
   }
 
   // on login 
-  function displayUser(){
-    let elem = document.querySelector("#displayUser");
+
+  window.onload = function(){
+    const token = sessionStorage.getItem("token");
+    const userName = sessionStorage.getItem("userName");
+
+    if(userName){
+      let elem = document.querySelector("#displayUser");
     let userName = sessionStorage.getItem("userName");
 
     // on login display welcome message
-    if (userName !== "undefined"){
       elem.innerHTML = `Welcome, ${userName}`;
 
     // and display the logout and create post options
@@ -169,20 +172,9 @@ function login(mail, pwd){
     // remove display of register and login dropdowns
     registerDrop.className = "d-none";
     loginDrop.className = "d-none";
-
-    // // give user the option to create a post
-    // let postDrop = document.querySelector("#post-dropdown");
-    // postDrop.className = "btn-group";
-
+      
     }
   }
-
-
-// POSTS
-
-// here we need an event listener that will get the title and description from a form
-// in the html and that will also call createPost
-
 
 
 const postButton = document.getElementById('create-post');
@@ -218,7 +210,7 @@ function createPost(bearer_token, title, description){
            })
     }) 
 
-    window.location.reload();
+    // window.location.reload();
     
 }
 
