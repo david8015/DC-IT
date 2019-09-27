@@ -233,6 +233,7 @@ function login(mail, pwd){
              f.appendChild(d3);
           //         <textarea class="form-control" rows="3"></textarea>
            let t = document.createElement("textarea");
+           t.id = "comment-text-area"
             t.className= "form-control";
             t.setAttribute = ("rows", 3);
 
@@ -240,6 +241,7 @@ function login(mail, pwd){
           //       </div>
           //       <button type="submit" class="btn btn-primary">Submit</button>
           let d = document.createElement("button");
+          d.id = "create-comment";
           d.className = "btn btn-primary";
           d.setAttribute = ("type", "submit");
           d.innerHTML = "Submit";
@@ -274,6 +276,15 @@ function login(mail, pwd){
           let p2 = document.createElement("p");
           p2.innerHTML = response[0].text;
           d5.appendChild(p2);
+          console.log(document.getElementById("create-comment"), 'create comment node');
+         document.getElementById("create-comment").addEventListener('click', function(e){
+        e.preventDefault();
+        commentTextArea = document.getElementById("comment-text-area")
+        text = commentTextArea.value;
+        createComment(text)
+
+})
+
         }
       })
       .catch ((err) => {
@@ -359,8 +370,40 @@ function postEventListener(){
    postList[i].addEventListener("click", function(){
      console.log("event listener");
      console.log(event.target.id);
+     sessionStorage.setItem("PostId", event.target.id);
      getCommentsByPostId(event.target.id)
+
     //  return event.target.id;
    });
  }
 };
+// let createCommentButton = document.getElementById("create-comment")
+
+
+function createComment(text){
+  let postId = sessionStorage.getItem("PostId")
+  let bearer_token = sessionStorage.getItem("token")
+  let bearer = 'Bearer ' + bearer_token;
+  fetch(`http://thesi.generalassemb.ly:8080/comment/${postId}`, {
+    method: 'POST',
+
+    headers:{
+    'Authorization': bearer,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'          
+  },
+
+  body: JSON.stringify({
+        text: text,
+           })
+    }).then((response) => {
+          return response.json();
+    }).then((data) => {
+      console.log(data);
+    }) 
+    
+}
+
+
+
+  
