@@ -447,7 +447,8 @@ function postEventListener(){
    });
  }
 };
-// let createCommentButton = document.getElementById("create-comment")
+
+// COMMENT
 
 
 function createComment(text){
@@ -494,6 +495,50 @@ function delComment(commentId){
 
     }).then((response) => {
           alert("Your comment was deleted")
+          return response.json();
+
+    }).then((data) => {
+      console.log(data);
+    }) 
+    
+}
+
+// PROFILE
+
+const createProfileButton = document.getElementById("create-profile");
+
+createProfileButton.addEventListener('click',function (event){
+  
+  event.preventDefault;
+  
+   const addMail = document.getElementById("additionalEmail");
+   const mobile = document.getElementById("mobile"); 
+   const address = document.getElementById("address");
+
+   createProfile(addMail, mobile, address);
+})
+
+
+function createProfile(addMail, mobile, address){
+ 
+  let bearer_token = sessionStorage.getItem("token")
+  let bearer = 'Bearer ' + bearer_token;
+  fetch(`http://thesi.generalassemb.ly:8080/profile`, {
+    method: 'POST',
+
+    headers:{
+    'Authorization': bearer,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'          
+  },
+
+  body: JSON.stringify({
+        "additionalEmail": addMail,
+        "mobile": mobile,
+        "address": address,
+           })
+    }).then((response) => {
+          alert("Your comment was entered")
           return response.json();
 
     }).then((data) => {
