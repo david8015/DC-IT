@@ -70,7 +70,18 @@ signUpButton.addEventListener('click', function (event) {
           cardBtn.setAttribute("data-postid", response[i].id);
           cardBtn.setAttribute("href", "#");
           cardBtn.className = "btn btn-primary listener";
-          cardBtn.innerHTML = "Read More →"
+          cardBtn.innerHTML = "Read More →";
+
+
+          cardBtn.title = response[i].title;
+          cardBtn.cardText = response[i].description;
+
+
+          cardBtn.nodeName = response[i].user.userName;
+          cardBtn.value = response[i].user.userName;
+          sessionStorage.setItem("postUserName", response[i].user.userName);
+       
+
 
           postsBoard.appendChild(postMain);
            postMain.appendChild(cardTitle);
@@ -92,7 +103,6 @@ signUpButton.addEventListener('click', function (event) {
          commentBtn.innerHTML = "DELETE";
 
          postFooter.appendChild(commentBtn);
-        
           }
         console.log(response); 
       })
@@ -134,6 +144,7 @@ function login(mail, pwd){
     })
     .then((response )=> {
         return response.json();
+       
     })
     .then((response) =>{
       sessionStorage.setItem('token', response.token);
@@ -154,9 +165,15 @@ function login(mail, pwd){
         return response.json();
       })
       .then ((response) => {
+        console.log(response);
         // console.log('done');
         // console.log(response.length);
-        if(response.length > 0){
+
+        let postTitle = sessionStorage.getItem("postTitle");
+        let postDesc = sessionStorage.getItem("postDesc");
+
+        console.log("post tile: " + postTitle);
+        console.log("post description: " + postDesc);
 
         let mainContent = document.querySelector("#main-content");
         mainContent.className = "d-none";
@@ -174,7 +191,11 @@ function login(mail, pwd){
           // <h1 class="mt-4">Post Title</h1>
           let title = document.createElement("H1");
           title.className = "mt-4";
-          title.innerHTML = response[0].post.title;
+          title.innerHTML = postTitle;
+
+
+
+          // title.innerHTML = response[0].post.title;
 
           // console.log("test 2" + response[0].post.title);
           // console.log("test");
@@ -184,11 +205,11 @@ function login(mail, pwd){
           mainDiv.appendChild(title);
           {/* <!-- Author --> */}
           // <p class="lead"></p>
-         let p = document.createElement("p");
-         p.className = "lead";
-         p.innerHTML = `create by ${response[0].post.user.username}`;
+        //  let p = document.createElement("p");
+        //  p.className = "lead";
+        //  p.innerHTML = `create by ${response[0].post.user.username}`;
 
-         mainDiv.appendChild(p);
+        //  mainDiv.appendChild(p);
 
           {/* <hr> */}
          let hr = document.createElement("hr");
@@ -198,7 +219,10 @@ function login(mail, pwd){
           // <p class="lead">Lorem ipsum</p>
           let postContent = document.createElement("p");
           postContent.className = "lead";
-          postContent.innerHTML = response[0].post.description;
+          postContent.innerHTML = postDesc;
+
+
+          // postContent.innerHTML = response[0].post.description;
 
           mainDiv.appendChild(postContent);
 
@@ -253,6 +277,7 @@ function login(mail, pwd){
 
           //  <!-- Single Comment --> 
           //  <div class="media mb-4">
+
           for(let i=0; i<response.length; i++){
 
           let d4 = document.createElement("div");
@@ -279,20 +304,33 @@ function login(mail, pwd){
           p2.innerHTML = response[i].text;
           d5.appendChild(p2);
           // loop finishes here
+
+          if(sessionStorage.getItem("userName") === response[i].user.username){
+             let btn = document.createElement("button");
+             btn.innerHTML = "DELETE";
+             btn.id = response[i].id;
+             d5.appendChild(btn);
+
+             btn.addEventListener("click", function(){
+              delComment(event.target.id);
+              console.log("from click fiunction");
+             })
+
+             
           }
+        }
+
           console.log(document.getElementById("create-comment"), 'create comment node');
          document.getElementById("create-comment").addEventListener('click', function(e){
         e.preventDefault();
         commentTextArea = document.getElementById("comment-text-area")
         text = commentTextArea.value;
         createComment(text)
-        commentTextArea.value = ""
-   
-               
+        commentTextArea.value = "";
 
 })
 
-        }
+    
       })
       .catch ((err) => {
         console.log(err);
@@ -375,9 +413,28 @@ function postEventListener(){
  let postList = document.querySelectorAll(".listener");
  for(let i=0; i< postList.length; i++){
    postList[i].addEventListener("click", function(){
-     console.log("event listener");
-     console.log(event.target.id);
+    //  console.log("event listener");
+    //  console.log(event.target.id);\
      sessionStorage.setItem("PostId", event.target.id);
+     sessionStorage.setItem("postTitle", event.target.title);
+     sessionStorage.setItem("postDesc", event.target.cardText);
+       
+     console.log("value" + event.target.value)
+     console.log("test" + event.target.nodeName);
+
+
+    //  console.log(event.target.getItem);
+    // let postUser = event.target.sessionStorage.getItem("postUserName");
+    // let postUserName = event.sessionStorage.target.getItem("postUserName");
+    // console.log(postUserName);
+    // console.log(postUser);
+    //  console.log("card title" + event.target.title)
+    //  console.log("class desc " + event.target.cardText);
+    //  console.log("common text" + event.target.commentTextArea);
+    //  console.log("inner html" + event.target.innerHTML);
+    //  console.log(event.target.response);
+    //  console.log(event.target.)
+    //  sessionStorage.setItem("postTitle", event.target.)
      getCommentsByPostId(event.target.id)
    
     //  return event.target.id;
@@ -415,11 +472,13 @@ function createComment(text){
 
 
 function delComment(commentId){
-  let id = commentId
+  let id = commentId;
+
+  console.log("comment Id: " + id);
   let bearer_token = sessionStorage.getItem("token")
   let bearer = 'Bearer ' + bearer_token;
   fetch(`http://thesi.generalassemb.ly:8080/comment/${commentId}`, {
-    method: 'DEL',
+    method: 'DELETE',
 
     headers:{
     'Authorization': bearer,
@@ -427,9 +486,9 @@ function delComment(commentId){
     'Content-Type': 'application/json'          
   },
 
-  body: JSON.stringify({
-        text: text,
-           })
+  // body: JSON.stringify({
+  //       text: text,
+  //          })
     }).then((response) => {
           alert("Your comment was deleted")
           return response.json();
@@ -439,7 +498,3 @@ function delComment(commentId){
     }) 
     
 }
-
-
-
-  
