@@ -66,13 +66,20 @@ signUpButton.addEventListener('click', function (event) {
       
           let cardBtn = document.createElement("a");
           cardBtn.id= response[i].id;
-          // cardBtn.id = "read-more";
           cardBtn.setAttribute("data-postid", response[i].id);
           cardBtn.setAttribute("href", "#");
-          cardBtn.className = "btn btn-primary listener";
           cardBtn.innerHTML = "Read More →";
+      
+          let userName = sessionStorage.getItem("userName");
 
+          if(userName){
+          cardBtn.className = "btn btn-primary listener";
+          }
 
+          else{
+          cardBtn.className = "btn btn-primary listener d-none";
+          }
+          
           cardBtn.title = response[i].title;
           cardBtn.cardText = response[i].description;
 
@@ -150,7 +157,6 @@ function login(mail, pwd){
       sessionStorage.setItem('token', response.token);
       sessionStorage.setItem("userName", response.username);
       window.location.reload();
-
     })
     .catch(function(error){
         alert("Wrong Username or password")
@@ -329,8 +335,6 @@ function login(mail, pwd){
         commentTextArea.value = "";
 
 })
-
-    
       })
       .catch ((err) => {
         console.log(err);
@@ -369,7 +373,6 @@ function login(mail, pwd){
     // remove display of register and login dropdowns
     registerDrop.className = "d-none";
     loginDrop.className = "d-none";
-      
     }
   }
 
