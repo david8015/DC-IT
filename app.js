@@ -47,7 +47,7 @@ signUpButton.addEventListener('click', function (event) {
 
             //  generate Recent Posts dynamically
          let postsBoard = document.createElement("div");
-         postsBoard.id="post";
+         postsBoard.id = "post";
          postsBoard.className = "card mb-4";
 
          document.querySelector("#main-content").appendChild(postsBoard);
@@ -286,6 +286,9 @@ function login(mail, pwd){
         commentTextArea = document.getElementById("comment-text-area")
         text = commentTextArea.value;
         createComment(text)
+        commentTextArea.value = ""
+   
+               
 
 })
 
@@ -376,7 +379,7 @@ function postEventListener(){
      console.log(event.target.id);
      sessionStorage.setItem("PostId", event.target.id);
      getCommentsByPostId(event.target.id)
-
+   
     //  return event.target.id;
    });
  }
@@ -401,7 +404,36 @@ function createComment(text){
         text: text,
            })
     }).then((response) => {
+          alert("Your comment was entered")
           return response.json();
+
+    }).then((data) => {
+      console.log(data);
+    }) 
+    
+}
+
+
+function delComment(commentId){
+  let id = commentId
+  let bearer_token = sessionStorage.getItem("token")
+  let bearer = 'Bearer ' + bearer_token;
+  fetch(`http://thesi.generalassemb.ly:8080/comment/${commentId}`, {
+    method: 'DEL',
+
+    headers:{
+    'Authorization': bearer,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'          
+  },
+
+  body: JSON.stringify({
+        text: text,
+           })
+    }).then((response) => {
+          alert("Your comment was deleted")
+          return response.json();
+
     }).then((data) => {
       console.log(data);
     }) 
