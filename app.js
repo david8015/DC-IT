@@ -405,8 +405,11 @@ function createPost(bearer_token, title, description){
         title: title,
         description: description,
            })
-    }) 
-}
+    })
+    .then(() => {
+      window.location.reload();
+    })
+  }
 
 // create event listener on each button and return the post ID
 function postEventListener(){
@@ -486,9 +489,6 @@ function delComment(commentId){
     'Content-Type': 'application/json'          
   },
 
-  // body: JSON.stringify({
-  //       text: text,
-  //          })
     }).then((response) => {
           alert("Your comment was deleted")
           return response.json();
@@ -498,3 +498,12 @@ function delComment(commentId){
     }) 
     
 }
+
+document.querySelector("#logout").addEventListener("click", function(){
+  sessionStorage.clear();
+  window.location.reload();
+})
+
+document.querySelector("#logo").addEventListener("click", function(){
+  window.location.reload();
+})
