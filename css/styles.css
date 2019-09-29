@@ -16,7 +16,7 @@
   margin: 0 100px;
 }
 
-.navbar-nav a, #register-dropdown button, #login-dropdown button, #create-post, #logout, #post-btn{
+.navbar-nav a, #register-dropdown button, #login-dropdown button, #create-post, #post-btn, #profile-btn, #logout{
   color: #8f36f5;
   background-color: #bfcce0;
   margin: 10px;

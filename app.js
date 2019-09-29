@@ -373,6 +373,9 @@ function login(mail, pwd){
     // remove display of register and login dropdowns
     registerDrop.className = "d-none";
     loginDrop.className = "d-none";
+
+    let profileDrop = document.querySelector("#profile-dropdown");
+    profileDrop.className = "btn-group";
     }
   }
 
@@ -509,18 +512,20 @@ const createProfileButton = document.getElementById("create-profile");
 
 createProfileButton.addEventListener('click',function (event){
   
-  event.preventDefault;
+  event.preventDefault();
   
-   const addMail = document.getElementById("additionalEmail");
-   const mobile = document.getElementById("mobile"); 
-   const address = document.getElementById("address");
-
+   const addMail = document.getElementById("additional-email").value;
+   const mobile = document.getElementById("mobile").value; 
+   const address = document.getElementById("address").value;
+console.log("got info")
    createProfile(addMail, mobile, address);
 })
 
 
 function createProfile(addMail, mobile, address){
- 
+  (async () => {
+    const rawResponse = await 
+ console.log(addMail, mobile, address);
   let bearer_token = sessionStorage.getItem("token")
   let bearer = 'Bearer ' + bearer_token;
   fetch(`http://thesi.generalassemb.ly:8080/profile`, {
@@ -528,7 +533,6 @@ function createProfile(addMail, mobile, address){
 
     headers:{
     'Authorization': bearer,
-    'Accept': 'application/json',
     'Content-Type': 'application/json'          
   },
 
@@ -538,14 +542,20 @@ function createProfile(addMail, mobile, address){
         "address": address,
            })
     }).then((response) => {
-          alert("Your comment was entered")
+          if(response.status === 200)
+            alert("Your profile was created");
+
           return response.json();
 
-    }).then((data) => {
-      console.log(data);
-    }) 
+    }).then((response) => {
+      console.log(response);
+    }) .catch ((err) => {
+      console.log(err);
+    })
+   })() 
+    }
     
-}
+
 
 document.querySelector("#logout").addEventListener("click", function(){
   sessionStorage.clear();
