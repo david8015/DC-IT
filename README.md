@@ -1,15 +1,15 @@
 # DC-IT
 
 
-
-
                                     General Approach
+                                    
+Initially we both sat together to discuss the project in detail. During the conversation, we wrote down things on paper and draw some wireframes (see link below). We started with the API calls testing through Postman and then we continued to develop functions that could actually be called from the App. We tested at every step. We also had to figure out how to work well together since at first, we lost some time fixing our files to work together. We started doing pair programming which for us meant that we would take turns to code and the other would watch over to make suggestions, find mistakes or do a quick research. This worked well for us. We chose only one feature to accomplish at the time and we would test it and rewrite code until it worked perfectly and then we would move to our next feature.
+
+While discussing our vision for the application we realized that we had an end goal in mind, but we weren’t really sure how to get there. With a general idea of what we wanted to develop (through the development of user stories & wireframes) we began designing our pages and adding functionalities. We knew that this would be a journey of discovery and reliance on our resources. When we came across a challenge which we didn’t know how to solve we relied on our resources (online search, peers etc.) and a bit of trial and error. Slowly our vision began to take shape and give way to what you see today. 
+
                                     
    Developed wireframes. 
    [cloudinary] (https://cloudinary.com/console/media_library/folders/all/DC-IT)
-
-
-
 
 
 
