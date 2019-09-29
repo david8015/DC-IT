@@ -3,7 +3,10 @@
 
 
 
-
+                                    General Approach
+                                    
+   Developed wireframes. 
+   [cloudinary] (https://cloudinary.com/console/media_library/folders/all/DC-IT)
 
 
 
