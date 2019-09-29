@@ -58,7 +58,7 @@ signUpButton.addEventListener('click', function (event) {
          
          let cardTitle = document.createElement("h2");
          cardTitle.className = "card-title";
-         cardTitle.innerHTML = response[i].title + " " + response[i].id;
+         cardTitle.innerHTML = response[i].title;
       
           let cardText = document.createElement("p");
           cardText.className = "card-text";
@@ -154,9 +154,14 @@ function login(mail, pwd){
        
     })
     .then((response) =>{
+      if(response.token){
       sessionStorage.setItem('token', response.token);
       sessionStorage.setItem("userName", response.username);
       window.location.reload();
+      }
+      else{
+        alert("Wrong Username or password");
+      }
     })
     .catch(function(error){
         alert("Wrong Username or password")
@@ -554,8 +559,6 @@ function createProfile(addMail, mobile, address){
     })
    })() 
     }
-    
-
 
 document.querySelector("#logout").addEventListener("click", function(){
   sessionStorage.clear();
